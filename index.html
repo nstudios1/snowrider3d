@@ -2,38 +2,174 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N-Studios | Snow Rider 3D & More</title>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2530/2530005.png">
-    <title>Snow Rider 3D | N-Studios Edition</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
-        body { margin: 0; background: #050505; color: white; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
-        #game-container { width: 100%; height: 85vh; background: #000; }
-        iframe { width: 100%; height: 100%; border: none; }
-        .content { padding: 40px; max-width: 900px; margin: auto; }
-        .glass-card { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(15px); 
-            border-radius: 30px; 
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        :root { --primary: #00d4ff; --dark: #0a0a0b; --card-bg: #1a1a1c; --btn-play: #8cff1a; }
+        body { margin: 0; background: var(--dark); color: white; font-family: 'Inter', sans-serif; }
+        
+        /* Navbar Profesional */
+        nav { 
+            background: #000; padding: 15px 5%; display: flex; 
+            align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 1000; 
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
-        h1 { color: #00d4ff; font-size: 2.5rem; margin-top: 0; }
-        .badge { background: #ffcc00; color: black; padding: 5px 12px; border-radius: 50px; font-weight: bold; font-size: 0.8rem; }
+        .logo-box { display: flex; align-items: center; gap: 10px; }
+        .logo-box img { width: 35px; height: 35px; border-radius: 8px; }
+        .logo { font-weight: 800; font-size: 1.2rem; color: white; letter-spacing: 1px; }
+        .logo span { font-weight: 400; opacity: 0.6; }
+
+        .menu a { color: #aaa; text-decoration: none; margin-left: 20px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .menu a:hover { color: var(--primary); }
+
+        /* Hero Section (Snow Rider) */
+        .hero { padding: 30px 5%; display: flex; justify-content: center; background: radial-gradient(circle at center, #1a1a1c 0%, #0a0a0b 100%); }
+        #game-box { 
+            width: 100%; max-width: 1100px; height: 600px; 
+            background: #000; border-radius: 15px; overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.05);
+        }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        /* Controles y Botón Play */
+        .controls-bar { 
+            max-width: 1100px; margin: 20px auto; 
+            background: var(--card-bg); border-radius: 12px; padding: 15px; 
+            display: flex; justify-content: space-between; align-items: center;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .btn-play {
+            background: var(--btn-play); color: #000; padding: 15px 40px; 
+            border-radius: 10px; font-weight: 800; text-decoration: none;
+            font-size: 1rem; text-transform: uppercase; 
+            transition: 0.2s ease-in-out;
+            box-shadow: 0 0 20px rgba(140,255,26,0.3);
+            cursor: pointer;
+        }
+        .btn-play:hover { transform: scale(1.03); box-shadow: 0 0 30px rgba(140,255,26,0.6); }
+
+        /* Grid de Juegos */
+        .container { padding: 50px 5%; }
+        h2 { font-size: 1.8rem; margin-bottom: 30px; font-weight: 800; border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; }
+        .game-grid { 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+            gap: 20px; 
+        }
+        .game-card { 
+            background: var(--card-bg); border-radius: 12px; overflow: hidden; 
+            transition: 0.3s ease; cursor: pointer; border: 1px solid transparent;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .game-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,212,255,0.3); }
+        .game-card img { width: 100%; height: 130px; object-fit: cover; }
+        .game-card h3 { padding: 12px; margin: 0; font-size: 0.85rem; font-weight: 600; text-align: center; }
+
+        /* Footer */
+        footer { text-align: center; padding: 50px 5%; border-top: 1px solid rgba(255,255,255,0.05); opacity: 0.4; font-size: 0.75rem; background: #000; margin-top: 50px; }
     </style>
 </head>
 <body>
-   <div id="game-container">
+
+<nav>
+    <div class="logo-box">
+        <img src="https://nstudios1.github.io/snowrider3d/manifest.json" alt="Logo N-Studios" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2530/2530005.png'">
+        <div class="logo">N-STUDIOS <span>GAMES</span></div>
+    </div>
+    <div class="menu">
+        <a href="#popular">Popular</a>
+        <a href="#racing">Racing</a>
+        <a href="#sports">Sports</a>
+        <a href="#skill">Skill</a>
+        <a href="#more">More ▾</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <div id="game-box">
         <iframe src="https://4thfritely-bit.github.io/snowrider3d/"></iframe>
     </div>
-    <div class="content">
-        <div class="glass-card">
-            <span class="badge">N-STUDIOS ORIGINAL</span>
-            <h1>Snow Rider 3D Ultra</h1>
-            <p>Disfruta de la versión más fluida y optimizada de Snow Rider 3D. Sin anuncios intrusivos, solo velocidad pura en la nieve.</p>
-            <div style="margin-top: 20px; opacity: 0.6; font-size: 0.9rem;">
-                🎮 Controles: Flechas o WASD para moverte | Espacio para saltar.
-            </div>
+</div>
+
+<div class="controls-bar">
+    <div style="font-size: 0.85rem; opacity: 0.6;">🕹️ Controles: Flechas o WASD | Salto: Espacio</div>
+    <a href="#popular" class="btn-play">MÁS JUEGOS ABAJO ↓</a>
+</div>
+
+<div class="container" id="popular">
+    <h2>Colección Destacada</h2>
+    <div class="game-grid">
+        <div class="game-card" onclick="location.href='https://nstudios1.github.io/snowrider3d/'">
+            <img src="https://moto-x3m.io/images/moto-x3m.png" alt="Snow Rider">
+            <h3>Snow Rider 3D</h3>
+        </div>
+
+        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/moto-x3m/'">
+            <img src="https://i.ibb.co/L5hY6Kj/moto-x3m.png" alt="Moto X3M">
+            <h3>Moto X3M</h3>
+        </div>
+
+        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/tunnel-rush/'">
+            <img src="https://edumediadepot.com/wp-content/uploads/2023/11/tunnel-rush.png" alt="Tunnel Rush">
+            <h3>Tunnel Rush</h3>
+        </div>
+
+        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/subway-surfers/'">
+            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/31/31/31" alt="Subway Surfers">
+            <h3>Subway Surfers</h3>
+        </div>
+
+        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/retro-bowl/'">
+            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple122/v4/36/44/36" alt="Retro Bowl">
+            <h3>Retro Bowl</h3>
+        </div>
+
+        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/vex-4/'">
+            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/c3/91/c3" alt="Vex 4">
+            <h3>Vex 4</h3>
+        </div>
+
+        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/temple-run-2/'">
+            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/66/91/66" alt="Temple Run 2">
+            <h3>Temple Run 2</h3>
+        </div>
+
+        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/1v1-lol/'">
+            <img src="https://edumediadepot.com/wp-content/uploads/2023/11/1v1-lol.png" alt="1v1 LOL">
+            <h3>1v1.LOL</h3>
+        </div>
+
+        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/monkey-mart/'">
+            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple122/v4/c3/91/c3" alt="Monkey Mart">
+            <h3>Monkey Mart</h3>
+        </div>
+
+        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/geometry-dash/'">
+            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/66/91/66" alt="Geometry Dash">
+            <h3>Geometry Dash</h3>
         </div>
     </div>
+</div>
+
+<footer>
+    N-STUDIOS GAMES | El Mejor Portal de Juegos de la Montaña.<br>
+    © 2026 N-STUDIOS | Todos los derechos reservados.<br>
+    Hawaii Division - Producido por R-Dev
+</footer>
+
+<script>
+    // Pequeño truco para que los links externos abran en pantalla completa
+    document.querySelectorAll('.game-card').forEach(card => {
+        card.setAttribute('target', '_blank');
+    });
+</script>
+
 </body>
 </html>
