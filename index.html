@@ -3,173 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N-Studios | Snow Rider 3D & More</title>
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2530/2530005.png">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
+    <title>N-GAMES HUB | HI-DIV 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #00d4ff; --dark: #0a0a0b; --card-bg: #1a1a1c; --btn-play: #8cff1a; }
-        body { margin: 0; background: var(--dark); color: white; font-family: 'Inter', sans-serif; }
-        
-        /* Navbar Profesional */
-        nav { 
-            background: #000; padding: 15px 5%; display: flex; 
-            align-items: center; justify-content: space-between;
-            position: sticky; top: 0; z-index: 1000; 
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        :root { 
+            --neon: #8cff1a; --yellow: #ffea00; --bg: #050505; --card: #111113;
+            --glitch: rgba(140, 255, 26, 0.3);
         }
-        .logo-box { display: flex; align-items: center; gap: 10px; }
-        .logo-box img { width: 35px; height: 35px; border-radius: 8px; }
-        .logo { font-weight: 800; font-size: 1.2rem; color: white; letter-spacing: 1px; }
-        .logo span { font-weight: 400; opacity: 0.6; }
+        
+        body { 
+            margin: 0; background: var(--bg); color: white; font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; scroll-behavior: smooth;
+        }
 
-        .menu a { color: #aaa; text-decoration: none; margin-left: 20px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .menu a:hover { color: var(--primary); }
+        /* Nav Estilo Cyberpunk */
+        nav { 
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
+            padding: 15px 4%; display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--neon);
+            box-shadow: 0 0 20px rgba(140, 255, 26, 0.2);
+        }
 
-        /* Hero Section (Snow Rider) */
-        .hero { padding: 30px 5%; display: flex; justify-content: center; background: radial-gradient(circle at center, #1a1a1c 0%, #0a0a0b 100%); }
-        #game-box { 
-            width: 100%; max-width: 1100px; height: 600px; 
-            background: #000; border-radius: 15px; overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.05);
+        .logo { font-family: 'Anton'; font-size: 1.8rem; letter-spacing: 2px; cursor: pointer; text-transform: uppercase; }
+        .logo span { color: var(--neon); text-shadow: 0 0 15px var(--neon); }
+
+        .search-bar { 
+            background: #151517; border: 1.5px solid var(--neon); border-radius: 50px;
+            padding: 8px 20px; width: 35%; display: flex; align-items: center;
+        }
+        .search-bar input { background: none; border: none; color: white; width: 100%; outline: none; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; }
+
+        /* Main Layout */
+        .main-wrapper {
+            display: grid; grid-template-columns: 1fr 320px; gap: 25px;
+            padding: 25px 4%; max-width: 1700px; margin: 0 auto;
+        }
+
+        .iframe-container { 
+            width: 100%; height: 600px; background: #000; border: 2px solid var(--neon); 
+            border-radius: 24px; overflow: hidden; position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
         }
         iframe { width: 100%; height: 100%; border: none; }
 
-        /* Controles y Botón Play */
-        .controls-bar { 
-            max-width: 1100px; margin: 20px auto; 
-            background: var(--card-bg); border-radius: 12px; padding: 15px; 
-            display: flex; justify-content: space-between; align-items: center;
-            border: 1px solid rgba(255,255,255,0.03);
+        /* Panel de Status Inferior */
+        .status-panel {
+            background: var(--card); border: 1px solid #222; border-radius: 15px;
+            padding: 15px 25px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
         }
-        .btn-play {
-            background: var(--btn-play); color: #000; padding: 15px 40px; 
-            border-radius: 10px; font-weight: 800; text-decoration: none;
-            font-size: 1rem; text-transform: uppercase; 
-            transition: 0.2s ease-in-out;
-            box-shadow: 0 0 20px rgba(140,255,26,0.3);
-            cursor: pointer;
-        }
-        .btn-play:hover { transform: scale(1.03); box-shadow: 0 0 30px rgba(140,255,26,0.6); }
+        .pulse { height: 8px; width: 8px; background: var(--neon); border-radius: 50%; display: inline-block; margin-right: 8px; animation: p 1.5s infinite; }
+        @keyframes p { 0% { box-shadow: 0 0 0 0 rgba(140, 255, 26, 0.7); } 100% { box-shadow: 0 0 0 10px rgba(140, 255, 26, 0); } }
 
-        /* Grid de Juegos */
-        .container { padding: 50px 5%; }
-        h2 { font-size: 1.8rem; margin-bottom: 30px; font-weight: 800; border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; }
-        .game-grid { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-            gap: 20px; 
-        }
-        .game-card { 
-            background: var(--card-bg); border-radius: 12px; overflow: hidden; 
-            transition: 0.3s ease; cursor: pointer; border: 1px solid transparent;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        .game-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,212,255,0.3); }
-        .game-card img { width: 100%; height: 130px; object-fit: cover; }
-        .game-card h3 { padding: 12px; margin: 0; font-size: 0.85rem; font-weight: 600; text-align: center; }
+        /* Sidebar con Scroll Interno */
+        .sidebar { display: flex; flex-direction: column; gap: 15px; max-height: 700px; overflow-y: auto; padding-right: 5px; }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 10px; }
 
-        /* Footer */
-        footer { text-align: center; padding: 50px 5%; border-top: 1px solid rgba(255,255,255,0.05); opacity: 0.4; font-size: 0.75rem; background: #000; margin-top: 50px; }
+        .side-card {
+            background: var(--card); border-radius: 15px; height: 90px; display: flex;
+            border: 1px solid #222; cursor: pointer; transition: 0.4s; overflow: hidden;
+        }
+        .side-card:hover { border-color: var(--neon); transform: translateX(-5px); }
+        .side-card img { width: 110px; object-fit: cover; }
+        .side-card-info { padding: 12px; display: flex; flex-direction: column; justify-content: center; }
+        .side-card-info h4 { margin: 0; font-size: 0.85rem; text-transform: uppercase; }
+        .side-card-info p { margin: 5px 0 0; color: var(--neon); font-size: 0.6rem; font-weight: 800; }
+
+        /* Librería Expandida */
+        .library-section { padding: 50px 4%; background: linear-gradient(to bottom, #050505, #0a0a0c); }
+        .library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
+
+        .game-card {
+            background: var(--card); border-radius: 20px; overflow: hidden; border: 1px solid #1a1a1c;
+            cursor: pointer; transition: 0.4s; position: relative;
+        }
+        .game-card:hover { transform: translateY(-10px); border-color: var(--neon); box-shadow: 0 10px 20px rgba(140, 255, 26, 0.1); }
+        .game-card img { width: 100%; height: 140px; object-fit: cover; }
+        .game-card-label { padding: 15px; text-align: center; font-weight: 900; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Botón de Pánico Invisible */
+        .panic-btn { position: fixed; bottom: 25px; right: 25px; z-index: 9999; text-decoration: none; opacity: 0.5; transition: 0.3s; }
+        .panic-btn:hover { opacity: 1; transform: scale(1.1); }
+        .panic-icon { background: #111; border: 1px solid #333; width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+
     </style>
 </head>
 <body>
 
-<nav>
-    <div class="logo-box">
-        <img src="https://nstudios1.github.io/snowrider3d/manifest.json" alt="Logo N-Studios" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2530/2530005.png'">
-        <div class="logo">N-STUDIOS <span>GAMES</span></div>
+    <a href="https://www.typing.com/student/games" class="panic-btn">
+        <div class="panic-icon">⌨️</div>
+    </a>
+
+    <nav>
+        <div class="logo" onclick="location.reload()">N-GAMES <span>HUB</span></div>
+        <div class="search-bar"><input type="text" id="find" placeholder="LOCALIZAR SOFTWARE..." onkeyup="search()"></div>
+        <div style="display:flex; gap:10px;">
+            <button onclick="document.getElementById('lib').scrollIntoView()" style="background:var(--neon); border:none; padding:10px 20px; border-radius:50px; font-weight:900; cursor:pointer; font-size:0.7rem;">LIBRERÍA</button>
+            <button onclick="document.getElementById('lib').scrollIntoView()" style="background:var(--yellow); border:none; padding:10px 20px; border-radius:50px; font-weight:900; cursor:pointer; font-size:0.7rem; color:black;">POPULAR 🔥</button>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="game-zone">
+            <div class="iframe-container" id="box">
+                <iframe id="screen" src="https://snow-rider-2.1games.io/" allowfullscreen></iframe>
+            </div>
+            
+            <div class="status-panel">
+                <div><span class="pulse"></span> SISTEMA: <span style="color:var(--neon)">ESTABLE</span></div>
+                <div>PLAYERS_ONLINE: <span id="online" style="color:var(--neon)">2,481</span></div>
+                <div style="display:flex; gap:15px;">
+                    <button onclick="full()" style="background:none; border:1px solid #444; color:white; padding:5px 15px; border-radius:5px; cursor:pointer; font-size:0.6rem;">FULLSCREEN</button>
+                    <button onclick="document.getElementById('screen').src += ''" style="background:#222; border:none; color:white; padding:5px 15px; border-radius:5px; cursor:pointer; font-size:0.6rem;">REINICIAR</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div style="color:var(--yellow); font-size:0.7rem; font-weight:900; margin-bottom:10px;">DESTACADOS_HOY</div>
+            
+            <div class="side-card" onclick="play('https://topvazgames.github.io/g6/drive-mad/')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS978Fp0DG45horfcROMLIbcBrNSrHrzpTEpw&s">
+                <div class="side-card-info"><h4>DRIVE MAD</h4><p>HOT 99%</p></div>
+            </div>
+
+            <div class="side-card" onclick="play('https://topvazgames.github.io/g6/moto-x3m/')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmMfW-1l54rkN8uZUwSvPAw3rkVZHwi0lRnQ&s">
+                <div class="side-card-info"><h4>MOTO X3M</h4><p>HOT 97%</p></div>
+            </div>
+
+            </div>
     </div>
-    <div class="menu">
-        <a href="#popular">Popular</a>
-        <a href="#racing">Racing</a>
-        <a href="#sports">Sports</a>
-        <a href="#skill">Skill</a>
-        <a href="#more">More ▾</a>
-    </div>
-</nav>
 
-<div class="hero">
-    <div id="game-box">
-        <iframe src="https://4thfritely-bit.github.io/snowrider3d/"></iframe>
-    </div>
-</div>
+    <div id="lib" class="library-section">
+        <h2 style="border-left: 6px solid var(--neon); padding-left: 20px; text-transform: uppercase; margin-bottom: 30px;">Catálogo N-Portal 2026</h2>
+        
+        <div class="library-grid" id="grid">
+            <div class="game-card" data-name="Vex 6" onclick="play('https://topvazgames.github.io/g6/vex-6/')">
+                <img src="https://img.gamedistribution.com/4925e12574364121a48c61c35f649c36-512x512.jpeg">
+                <div class="game-card-label">VEX 6</div>
+            </div>
 
-<div class="controls-bar">
-    <div style="font-size: 0.85rem; opacity: 0.6;">🕹️ Controles: Flechas o WASD | Salto: Espacio</div>
-    <a href="#popular" class="btn-play">MÁS JUEGOS ABAJO ↓</a>
-</div>
+            <div class="game-card" data-name="Monkey Mart" onclick="play('https://topvazgames.github.io/g6/monkey-mart/')">
+                <img src="https://i.ytimg.com/vi/KsyQBXdkAuM/maxresdefault.jpg">
+                <div class="game-card-label">MONKEY MART</div>
+            </div>
 
-<div class="container" id="popular">
-    <h2>Colección Destacada</h2>
-    <div class="game-grid">
-        <div class="game-card" onclick="location.href='https://nstudios1.github.io/snowrider3d/'">
-            <img src="https://moto-x3m.io/images/moto-x3m.png" alt="Snow Rider">
-            <h3>Snow Rider 3D</h3>
-        </div>
-
-        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/moto-x3m/'">
-            <img src="https://i.ibb.co/L5hY6Kj/moto-x3m.png" alt="Moto X3M">
-            <h3>Moto X3M</h3>
-        </div>
-
-        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/tunnel-rush/'">
-            <img src="https://edumediadepot.com/wp-content/uploads/2023/11/tunnel-rush.png" alt="Tunnel Rush">
-            <h3>Tunnel Rush</h3>
-        </div>
-
-        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/subway-surfers/'">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/31/31/31" alt="Subway Surfers">
-            <h3>Subway Surfers</h3>
-        </div>
-
-        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/retro-bowl/'">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple122/v4/36/44/36" alt="Retro Bowl">
-            <h3>Retro Bowl</h3>
-        </div>
-
-        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/vex-4/'">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/c3/91/c3" alt="Vex 4">
-            <h3>Vex 4</h3>
-        </div>
-
-        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/temple-run-2/'">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/66/91/66" alt="Temple Run 2">
-            <h3>Temple Run 2</h3>
-        </div>
-
-        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/1v1-lol/'">
-            <img src="https://edumediadepot.com/wp-content/uploads/2023/11/1v1-lol.png" alt="1v1 LOL">
-            <h3>1v1.LOL</h3>
-        </div>
-
-        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/monkey-mart/'">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple122/v4/c3/91/c3" alt="Monkey Mart">
-            <h3>Monkey Mart</h3>
-        </div>
-
-        <div class="game-card" onclick="location.href='https://topvazgames.github.io/g6/geometry-dash/'">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/66/91/66" alt="Geometry Dash">
-            <h3>Geometry Dash</h3>
+            <div class="game-card" data-name="EGG CAR" onclick="play('https://topvazgames.github.io/g6/egg-car/')">
+                <img src="https://imgs.crazygames.com/eggy-car/20230720050147/eggy-car-cover?metadata=none&quality=60&height=6070">
+                <div class="game-card-label">EGG CAR</div>
+            </div>
+            
+            <div class="game-card" data-name="TUNNEL RUSH" onclick="play('https://topvazgames.github.io/g6/tunnel-rush/')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ13q6aHn1f3Dd4U3w_mjs8NOot8U2bV0M8ZA&s">
+                <div class="game-card-label">TUNNEL RUSH</div>
+            </div>
         </div>
     </div>
-</div>
 
-<footer>
-    N-STUDIOS GAMES | El Mejor Portal de Juegos de la Montaña.<br>
-    © 2026 N-STUDIOS | Todos los derechos reservados.<br>
-    Hawaii Division - Producido por R-Dev
-</footer>
+    <footer style="text-align:center; padding:50px; opacity:0.3; font-size:0.6rem; font-family:monospace;">
+        N-GAMES HUB // HAWAII DIVISION // NO_TRACE_LOG
+    </footer>
 
-<script>
-    // Pequeño truco para que los links externos abran en pantalla completa
-    document.querySelectorAll('.game-card').forEach(card => {
-        card.setAttribute('target', '_blank');
-    });
-</script>
-
+    <script>
+        function play(url) {
+            document.getElementById('screen').src = url;
+            window.scrollTo({top:0, behavior:'smooth'});
+        }
+        function full() {
+            let b = document.getElementById('box');
+            if(!document.fullscreenElement) b.requestFullscreen(); else document.exitFullscreen();
+        }
+        function search() {
+            let term = document.getElementById('find').value.toUpperCase();
+            let cards = document.querySelectorAll('.game-card');
+            cards.forEach(c => {
+                c.style.display = c.dataset.name.toUpperCase().includes(term) ? "block" : "none";
+            });
+        }
+        setInterval(() => {
+            document.getElementById('online').innerText = (2400 + Math.floor(Math.random()*300)).toLocaleString();
+        }, 4000);
+    </script>
 </body>
 </html>
